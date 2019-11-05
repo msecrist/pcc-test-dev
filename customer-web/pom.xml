@@ -6,7 +6,7 @@
 	<groupId>io.pivotal.bookshop</groupId>
 	<artifactId>customer-web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>customer-web</name>
 	<description>Customer Web project for PCC client</description>
@@ -22,18 +22,19 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<sbdg.version>1.1.1.RELEASE</sbdg.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
 			<exclusions>
 				<exclusion>
 					<groupId>org.apache.logging.log4j</groupId>
 					<artifactId>log4j-to-slf4j</artifactId>
 				</exclusion>
 			</exclusions>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -73,13 +74,19 @@
 					<groupId>org.apache.logging.log4j</groupId>
 					<artifactId>log4j-to-slf4j</artifactId>
 				</exclusion>
-			</exclusions>
-		</dependency>
+			</exclusions>		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+
+		<!-- Add the Spring Boot Data GemFire dependency - use the property set above for the version -->
+
+		<!-- Add dependency for general Caching support -->
+
+		<!-- ========================================== -->
 
 	</dependencies>
 	<repositories>
@@ -93,8 +100,7 @@
 		</repository>
 	</repositories>
 
-	<!-- This should NOT be set as it causes the CF push to not deploy the Tomcat container and necessary code for
-	     PCC to get hooked up for session state caching
+	<!-- This is set so as to build a Spring Boot 'fat' JAR on 'mvn package' -->
 	<build>
 		<plugins>
 			<plugin>
@@ -103,5 +109,4 @@
 			</plugin>
 		</plugins>
 	</build>
-    -->
 </project>
